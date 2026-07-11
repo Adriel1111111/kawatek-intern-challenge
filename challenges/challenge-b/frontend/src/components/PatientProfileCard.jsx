@@ -24,18 +24,22 @@ function PatientProfileCard({ patient }) {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-3">
+      <div className="mt-6 grid gap-3 sm:grid-cols-4">
+        <div className="rounded-2xl bg-white/10 p-3">
+          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100">Patient ID</p>
+          <p className="mt-1 font-semibold">{patient.id}</p>
+        </div>
+        <div className="rounded-2xl bg-white/10 p-3">
+          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100">Age</p>
+          <p className="mt-1 font-semibold">{patient.age}</p>
+        </div>
+        <div className="rounded-2xl bg-white/10 p-3">
+          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100">Device</p>
+          <p className="mt-1 font-semibold">{patient.device}</p>
+        </div>
         <div className="rounded-2xl bg-white/10 p-3">
           <p className="text-xs uppercase tracking-[0.2em] text-cyan-100">Started</p>
           <p className="mt-1 font-semibold">{patient.start_date}</p>
-        </div>
-        <div className="rounded-2xl bg-white/10 p-3">
-          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100">Focus</p>
-          <p className="mt-1 font-semibold">Fine motor control</p>
-        </div>
-        <div className="rounded-2xl bg-white/10 p-3">
-          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100">Status</p>
-          <p className="mt-1 font-semibold">On track</p>
         </div>
       </div>
     </section>
