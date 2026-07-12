@@ -10,8 +10,9 @@ import ExercisePerformanceChart from './components/charts/ExercisePerformanceCha
 import FatigueChart from './components/charts/FatigueChart'
 import EmgSparkline from './components/charts/EmgSparkline'
 import RecoveryRadarChart from './components/charts/RecoveryRadarChart'
+import ClinicalInsightsPanel from './components/ClinicalInsightsPanel'
 import patientData from './data/patient_sessions.json'
-import { computeDashboardAnalytics, getEmgStatus, getFatigueStatus, getProgressStatus } from './utils/analytics'
+import { computeDashboardAnalytics, getEmgStatus, getProgressStatus } from './utils/analytics'
 
 function App() {
   const analytics = useMemo(() => computeDashboardAnalytics(patientData), [])
@@ -29,9 +30,13 @@ function App() {
     latestSession,
     earliestSession,
     totalTherapyDuration,
+    recommendations,
+    warnings,
+    recoveryScore,
+    summary,
   } = analytics
 
-  const summary = {
+  const headerSummary = {
     phase: getProgressStatus(latestSession?.overall_progress_percent ?? 0),
     durationLabel: `${totalTherapyDuration} min recorded`,
     progressLabel: `${averageProgress}% avg progress`,
@@ -53,7 +58,7 @@ function App() {
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,_#f8fbff,_#f4f7fb_55%,_#eef4fb)] px-4 py-5 text-slate-800 sm:px-6 lg:px-8 lg:py-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <Header patient={patient} summary={summary} />
+        <Header patient={patient} summary={headerSummary} />
 
         <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">
           <PatientProfileCard patient={patient} />
@@ -79,23 +84,11 @@ function App() {
           ))}
         </div>
 
-        <div className="grid gap-6 xl:grid-cols-[1.3fr_0.7fr]">
-          <PanelCard title="Progress overview" subtitle="Recovery progression and exercise accuracy" action="Live chart">
-            <div className="h-[270px] w-full">
-              <ProgressChart sessions={sessions} />
-            </div>
-          </PanelCard>
-
-          <PanelCard title="Latest recommendations" subtitle="Temporary analytics insights" action="AI-ready">
-            <div className="space-y-3">
-              {insights.map((item) => (
-                <div key={item} className="rounded-2xl border border-slate-200 bg-slate-50 p-3 text-sm text-slate-700">
-                  {item}
-                </div>
-              ))}
-            </div>
-          </PanelCard>
-        </div>
+        <PanelCard title="Progress overview" subtitle="Recovery progression and exercise accuracy" action="Clinical chart">
+          <div className="h-[270px] w-full">
+            <ProgressChart sessions={sessions} />
+          </div>
+        </PanelCard>
 
         <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
           <PanelCard title="Exercise performance" subtitle="Average accuracy by exercise type" action="Sorted">
@@ -122,14 +115,18 @@ function App() {
             </div>
           </PanelCard>
 
-          <PanelCard title="Recovery radar" subtitle="Average exercise accuracy by movement class" action="Bonus">
+          <PanelCard title="Recovery radar" subtitle="Average exercise accuracy by movement class" action="Clinical view">
             <div className="h-[260px] w-full">
               <RecoveryRadarChart sessions={sessions} />
             </div>
           </PanelCard>
         </div>
 
-        <PanelCard title="Session history" subtitle="Recent therapy sessions and recovery milestones" action="Expandable">
+        <PanelCard title="ACTIVAI Clinical Intelligence" subtitle="Data-driven clinical guidance generated from the current patient dataset" action="AI-ready">
+          <ClinicalInsightsPanel summary={{ ...analytics.summary, score: recoveryScore }} warnings={warnings} recommendations={recommendations} />
+        </PanelCard>
+
+        <PanelCard title="Session history" subtitle="Recent therapy sessions and recovery milestones" action="Detailed review">
           <SessionHistory sessions={sessions} />
         </PanelCard>
       </div>

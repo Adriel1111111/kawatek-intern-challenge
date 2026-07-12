@@ -1,6 +1,6 @@
 function PanelCard({ title, subtitle, action, children }) {
   return (
-    <section className="rounded-[28px] border border-slate-200/80 bg-white p-5 shadow-sm shadow-slate-200/70 sm:p-6">
+    <section className="flex h-full flex-col rounded-[28px] border border-slate-200/80 bg-white p-5 shadow-sm shadow-slate-200/70 sm:p-6">
       <div className="flex items-start justify-between gap-3">
         <div>
           <h3 className="text-lg font-semibold text-slate-900">{title}</h3>
@@ -8,7 +8,7 @@ function PanelCard({ title, subtitle, action, children }) {
         </div>
         {action ? <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">{action}</span> : null}
       </div>
-      <div className="mt-5">{children}</div>
+      <div className="mt-5 flex-1">{children}</div>
     </section>
   )
 }
