@@ -1,110 +1,92 @@
-# Challenge B: AI Programming & UX
+# ACTIVAI Rehabilitation Dashboard
 
-## Context
+A polished, data-driven rehabilitation dashboard for reviewing patient progress, therapy performance, and clinical insights. The project was built as a frontend-only React application that transforms sample rehabilitation session data into a professional, clinician-friendly interface.
 
-At Kawatek, we develop **ACTIVAI** — an AI-powered rehabilitation platform that helps patients train their neuromuscular control after receiving a bionic prosthetic. The platform displays real-time metrics, therapeutic exercises, and progress tracking.
+## Overview
 
-## The Problem
+This dashboard presents patient rehabilitation information in a clear, structured way for therapists and clinical reviewers. It combines patient details, progress metrics, analytics charts, and data-driven recommendations into a single-page experience.
 
-You are tasked with building a **Rehabilitation Dashboard Prototype** — a web application that visualizes patient rehabilitation data and provides an intuitive interface for tracking progress.
+## Implemented Features
 
-## Requirements
+- Responsive rehabilitation dashboard layout
+- Patient profile and care summary cards
+- Recovery, EMG, fatigue, and exercise performance metrics
+- Interactive charts for progress, exercise accuracy, fatigue, EMG trend, and recovery radar analysis
+- Data-driven clinical intelligence section with recommendations and warnings
+- Expandable session history for reviewing detailed therapy sessions
+- PDF export for a clean summary report
+- Loading skeletons, empty states, and accessible UI patterns
 
-Build a single-page web application that:
+## Technologies Used
 
-1. **Displays patient session data** from the provided JSON file
-2. **Visualizes rehabilitation metrics** with interactive charts
-3. **Implements an AI-powered recommendation** feature (can be simulated/rule-based)
-4. **Provides a clean, accessible UX** suitable for clinical use
+- React + Vite
+- Tailwind CSS
+- Chart.js and react-chartjs-2
+- react-icons
+- @react-pdf/renderer
 
-## Provided Files
+## Installation
 
+Prerequisites:
+- Node.js 18+
+- npm
+
+```bash
+cd challenges/challenge-b/frontend
+npm install
 ```
-challenge-b/
-├── README.md              (this file)
+
+## Run Locally
+
+```bash
+cd challenges/challenge-b/frontend
+npm run dev
+```
+
+Then open the local Vite URL in your browser.
+
+## Build for Production
+
+```bash
+cd challenges/challenge-b/frontend
+npm run build
+```
+
+## Project Structure
+
+```text
+src/
+├── App.jsx
+├── components/
+│   ├── charts/
+│   ├── ClinicalInsightsPanel.jsx
+│   ├── Header.jsx
+│   ├── MetricCard.jsx
+│   ├── PanelCard.jsx
+│   ├── PatientProfileCard.jsx
+│   ├── SessionHistory.jsx
+│   ├── LoadingSkeleton.jsx
+│   ├── EmptyState.jsx
+│   ├── ExportSummaryButton.jsx
+│   └── PdfExportDocument.jsx
 ├── data/
-│   └── patient_sessions.json   (sample rehabilitation session data)
-├── src/
-│   └── placeholder.html        (start here)
-├── design/
-│   └── wireframe.png           (basic layout reference)
-└── SOLUTION.md                 (write your explanation here)
+│   └── patient_sessions.json
+└── utils/
+    └── analytics.js
 ```
 
-## The Data
+## PDF Export
 
-`patient_sessions.json` contains rehabilitation session records:
+The dashboard includes an Export Summary button that generates a professional PDF report using the current patient data, clinical intelligence summary, and latest recommendations.
 
-```json
-{
-  "patient_id": "RYO-2027-001",
-  "sessions": [
-    {
-      "date": "2027-07-10",
-      "duration_minutes": 30,
-      "exercises": [
-        {
-          "name": "Power Grip Training",
-          "repetitions": 15,
-          "accuracy_percent": 72,
-          "avg_response_time_ms": 340,
-          "fatigue_index": 0.3
-        }
-      ],
-      "emg_quality_score": 0.85,
-      "overall_progress_percent": 45
-    }
-  ]
-}
-```
+## Screenshots
 
-## Tasks
+- Dashboard preview: placeholder coming soon
+- PDF export preview: placeholder coming soon
 
-### Task 1: Data Display (Required)
-- Load and display patient session history
-- Show a summary card with: total sessions, average accuracy, current progress
-- List individual sessions with expandable details
+## Future Improvements
 
-### Task 2: Data Visualization (Required)
-- **Progress over time** — line chart showing accuracy improvement across sessions
-- **Exercise breakdown** — bar chart comparing performance across exercise types
-- **Fatigue analysis** — visualization of fatigue index trends within and across sessions
-
-### Task 3: AI Recommendations (Required)
-- Based on the patient data, generate at least 3 personalized recommendations
-- Examples: "Increase power grip repetitions — accuracy above 80% for 3 consecutive sessions"
-- Can be rule-based logic (no ML model required, but bonus if you use one)
-- Display recommendations in a clear, actionable format
-
-### Task 4: UX & Accessibility (Required)
-- Responsive design (works on desktop and tablet)
-- Accessible color scheme and font sizes suitable for clinical environments
-- Clear data hierarchy — most important metrics visible at a glance
-
-### Task 5: Bonus Features
-- **Dark/light mode** toggle
-- **Session comparison** — select 2 sessions to compare side by side
-- **Export** — generate a PDF or printable summary report
-- **Real-time simulation** — animate incoming session data as if live
-
-## Tech Stack
-
-Choose any of the following (or combine):
-- **Frontend:** React, Vue, Svelte, or vanilla HTML/CSS/JS
-- **Charting:** Chart.js, D3.js, Recharts, or any visualization library
-- **Styling:** Tailwind CSS, Material UI, or custom CSS
-
-## Evaluation Focus
-
-- UI/UX design sensibility (clarity, hierarchy, accessibility)
-- Data visualization effectiveness
-- Code organization and component structure
-- Creative problem-solving in the recommendation engine
-- Responsiveness and attention to detail
-
-## Hints
-
-- Think about who uses this: therapists and patients. Keep it simple and clinical.
-- The recommendation engine doesn't need to be fancy — clear logic with good UX presentation matters more
-- Consider loading states, empty states, and error handling
-- A working prototype beats a pretty mockup that doesn't function
+- Connect the dashboard to a real backend or live patient data source
+- Add filtering and session comparison tools
+- Expand the recommendation engine with richer clinical logic
+- Introduce dark mode and additional accessibility refinements
