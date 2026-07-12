@@ -1,4 +1,5 @@
-# Solution Overview
+# Solution : Challenge B: AI Programming & UX
+# Adriel Fernandes
 
 This project was implemented as a React-based rehabilitation dashboard that turns structured therapy data into a clear, professional clinical interface. The solution focuses on clarity, responsiveness, and data storytelling rather than relying on a backend or external services.
 
