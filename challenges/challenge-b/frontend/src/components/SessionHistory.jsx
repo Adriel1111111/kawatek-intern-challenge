@@ -1,11 +1,16 @@
 import { useState } from 'react'
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
+import EmptyState from './EmptyState'
 
 function SessionHistory({ sessions }) {
   const [openSession, setOpenSession] = useState(sessions[0]?.session_id ?? null)
 
   const toggleSession = (sessionId) => {
     setOpenSession((current) => (current === sessionId ? null : sessionId))
+  }
+
+  if (!sessions.length) {
+    return <EmptyState title="No session history available" message="Session cards will appear here once the rehabilitation timeline is populated." />
   }
 
   return (
@@ -23,6 +28,7 @@ function SessionHistory({ sessions }) {
               className="flex w-full flex-col gap-3 text-left sm:flex-row sm:items-center sm:justify-between"
               onClick={() => toggleSession(session.session_id)}
               aria-expanded={isOpen}
+              aria-label={`Toggle session ${session.session_id} details`}
             >
               <div>
                 <p className="text-sm font-semibold text-slate-900">Session {session.session_id}</p>

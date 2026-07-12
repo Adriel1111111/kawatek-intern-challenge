@@ -1,6 +1,7 @@
-import { FiActivity, FiClock, FiFileText } from 'react-icons/fi'
+import { FiActivity, FiClock } from 'react-icons/fi'
+import ExportSummaryButton from './ExportSummaryButton'
 
-function Header({ patient, summary }) {
+function Header({ patient, summary, onExport, isExporting }) {
   return (
     <header className="rounded-[28px] border border-slate-200/80 bg-white/80 p-5 shadow-sm shadow-slate-200/70 backdrop-blur sm:p-6">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
@@ -23,11 +24,7 @@ function Header({ patient, summary }) {
             <FiActivity size={16} className="text-cyan-600" />
             <span>{summary.phase}</span>
           </div>
-          <button className="rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800">
-            <span className="inline-flex items-center gap-2">
-              <FiFileText size={16} /> Export summary
-            </span>
-          </button>
+          <ExportSummaryButton onExport={onExport} isExporting={isExporting} />
         </div>
       </div>
 

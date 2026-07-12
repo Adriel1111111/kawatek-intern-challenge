@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { FiAlertCircle, FiCpu } from 'react-icons/fi'
+import EmptyState from './EmptyState'
 
 function ClinicalInsightsPanel({ summary, warnings, recommendations }) {
   const visibleRecommendations = useMemo(() => recommendations.slice(0, 3), [recommendations])
@@ -49,33 +50,39 @@ function ClinicalInsightsPanel({ summary, warnings, recommendations }) {
         ))}
       </div>
 
-      <div className="grid gap-3 lg:grid-cols-3">
-        {visibleRecommendations.map((item) => (
-          <div key={item.title} className="rounded-[20px] border border-slate-200 bg-slate-50/80 p-4 shadow-sm shadow-slate-200/70">
-            <div className="flex items-center justify-between gap-2">
-              <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${item.priority === 'High' ? 'bg-rose-50 text-rose-700' : item.priority === 'Medium' ? 'bg-amber-50 text-amber-700' : 'bg-emerald-50 text-emerald-700'}`}>
-                {item.priority}
-              </span>
-              <span className="rounded-full bg-slate-200 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-700">
-                {item.category}
-              </span>
-            </div>
+      {!recommendations.length ? (
+        <EmptyState title="No recommendations yet" message="Clinical guidance will appear here once additional session data is available." />
+      ) : (
+        <>
+          <div className="grid gap-3 lg:grid-cols-3">
+            {visibleRecommendations.map((item) => (
+              <div key={item.title} className="rounded-[20px] border border-slate-200 bg-slate-50/80 p-4 shadow-sm shadow-slate-200/70">
+                <div className="flex items-center justify-between gap-2">
+                  <span className={`rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] ${item.priority === 'High' ? 'bg-rose-50 text-rose-700' : item.priority === 'Medium' ? 'bg-amber-50 text-amber-700' : 'bg-emerald-50 text-emerald-700'}`}>
+                    {item.priority}
+                  </span>
+                  <span className="rounded-full bg-slate-200 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-700">
+                    {item.category}
+                  </span>
+                </div>
 
-            <h5 className="mt-3 text-base font-semibold text-slate-900">{item.title}</h5>
-            <p className="mt-2 text-sm leading-6 text-slate-700">{item.reason}</p>
-            <div className="mt-3 flex items-center gap-2 text-sm text-slate-600">
-              <FiAlertCircle size={15} className="text-cyan-600" />
-              <span>{item.action}</span>
-            </div>
+                <h5 className="mt-3 text-base font-semibold text-slate-900">{item.title}</h5>
+                <p className="mt-2 text-sm leading-6 text-slate-700">{item.reason}</p>
+                <div className="mt-3 flex items-center gap-2 text-sm text-slate-600">
+                  <FiAlertCircle size={15} className="text-cyan-600" />
+                  <span>{item.action}</span>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      {recommendations.length > 3 ? (
-        <button type="button" className="w-fit rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-cyan-300 hover:text-cyan-700">
-          View All Recommendations
-        </button>
-      ) : null}
+          {recommendations.length > 3 ? (
+            <button type="button" className="w-fit rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:border-cyan-300 hover:text-cyan-700">
+              View All Recommendations
+            </button>
+          ) : null}
+        </>
+      )}
     </div>
   )
 }
